@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Smart Pump Controller — IoT case study by Samson Mwangi. Django, React Native, Pact, Appium, Maestro, Kong gateway, and Terraform on Minikube."
+    />
+    <title>Smart Pump Controller — Case Study — Samson Mwangi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <header class="site-nav">
+      <div class="container">
+        <a class="nav-brand" href="../index.html">Samson Mwangi</a>
+        <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">☰</button>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="../index.html#competencies">Expertise</a>
+          <a href="../index.html#experience">Experience</a>
+          <a href="../projects.html" aria-current="page">Projects</a>
+          <a href="../index.html#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <header class="page-header">
+        <div class="container">
+          <a class="back-link" href="../projects.html">← All projects</a>
+          <p class="section-label">Case study</p>
+          <h1>Smart Pump Controller</h1>
+          <p>
+            Smart pump control end to end — mobile app, Django API, firmware, Kong gateway, and
+            infrastructure — with unit tests, Pact contracts, Appium and Maestro mobile automation,
+            a custom Kong auth plugin, Terraform-managed environments, and CI/CD.
+          </p>
+          <div class="case-stack">
+            <span>Django REST</span>
+            <span>Expo / React Native</span>
+            <span>Firmware</span>
+            <span>Kong</span>
+            <span>Pact</span>
+            <span>Appium</span>
+            <span>Maestro</span>
+            <span>Terraform</span>
+            <span>Minikube / K8s</span>
+          </div>
+        </div>
+      </header>
+
+      <section style="padding-top: 0">
+        <div class="container">
+          <div class="case-grid reveal">
+            <div class="case-block">
+              <h3>The problem</h3>
+              <p>
+                A water pump that only works on-site is slow to operate and hard to trust. Operators
+                need remote start/stop, schedules, and device status — without breaking when the API,
+                app, or firmware drift apart, and without paying a full auth round-trip on every call.
+              </p>
+            </div>
+            <div class="case-block">
+              <h3>The approach</h3>
+              <p>
+                Build it as a monorepo production system: Kong in front of the API, clear service
+                contracts, infrastructure as code, and a test strategy that catches integration
+                breaks before release — not only happy-path UI checks.
+              </p>
+            </div>
+          </div>
+
+          <div class="reveal flow-section">
+            <p class="section-label">Architecture</p>
+            <h2 class="section-title">How the system fits together</h2>
+            <p class="section-lead">
+              Clients hit Kong first. The gateway routes to Django; firmware and the mobile app share
+              the same API surface behind it.
+            </p>
+
+            <div
+              class="arch-flow"
+              role="img"
+              aria-label="Mobile app and firmware go through Kong gateway to Django then to device"
+            >
+              <div class="arch-node">
+                Expo app
+                <small>Schedules &amp; control</small>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node highlight">
+                Kong
+                <small>Gateway + plugins</small>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node">
+                Django REST
+                <small>Pump API</small>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node">
+                Firmware
+                <small>Actuation</small>
+              </div>
+            </div>
+
+            <div
+              class="arch-flow"
+              role="img"
+              aria-label="Terraform provisions Minikube with Kong ingress and Postgres"
+              style="margin-top: 0"
+            >
+              <div class="arch-node">
+                Terraform
+                <small>Environments</small>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node">
+                Minikube
+                <small>K8s locally</small>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node highlight">
+                Kong Ingress
+                <small>/v1/api → backend</small>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node">
+                Postgres
+                <small>Auth &amp; data</small>
+              </div>
+            </div>
+
+            <div class="diagram-grid">
+              <figure>
+                <div class="diagram-panel" data-diagram="../assets/iot/architecture.png" data-alt="System architecture diagram">
+                  <div class="diagram-fallback">
+                    <h4>Request path</h4>
+                    <div class="flow-steps">
+                      <div class="flow-step">
+                        <span class="n">1</span>
+                        <p><strong>Client</strong> — Expo app or firmware sends API request</p>
+                      </div>
+                      <div class="flow-step">
+                        <span class="n">2</span>
+                        <p><strong>Kong</strong> — ingress routes <code>/v1/api</code>, runs plugins</p>
+                      </div>
+                      <div class="flow-step">
+                        <span class="n">3</span>
+                        <p><strong>Auth plugin</strong> — validates session against DB cache</p>
+                      </div>
+                      <div class="flow-step">
+                        <span class="n">4</span>
+                        <p><strong>Django</strong> — business logic for pump &amp; schedules</p>
+                      </div>
+                      <div class="flow-step">
+                        <span class="n">5</span>
+                        <p><strong>Device</strong> — firmware applies control state</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <figcaption class="diagram-caption">System flow — replace with <code>architecture.png</code></figcaption>
+              </figure>
+
+              <figure>
+                <div class="diagram-panel" data-diagram="../assets/iot/kong-gateway.png" data-alt="Kong gateway routing diagram">
+                  <div class="diagram-fallback">
+                    <h4>Kong at the edge</h4>
+                    <div class="flow-steps">
+                      <div class="flow-step">
+                        <span class="n">★</span>
+                        <p><strong>Ingress class: kong</strong> — Terraform-managed route</p>
+                      </div>
+                      <div class="flow-step">
+                        <span class="n">★</span>
+                        <p><strong>Strip path / preserve host</strong> — clean upstream handoff</p>
+                      </div>
+                      <div class="flow-step">
+                        <span class="n">★</span>
+                        <p><strong>Custom auth plugin</strong> — DB-backed session, not re-login</p>
+                      </div>
+                      <div class="flow-step">
+                        <span class="n">★</span>
+                        <p><strong>Upstream</strong> — Django backend service on the cluster</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <figcaption class="diagram-caption">Kong edge — replace with <code>kong-gateway.png</code></figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="case-grid reveal">
+            <div class="case-block">
+              <h3>Product stack</h3>
+              <ul>
+                <li>Expo / React Native — login, schedule dashboard, pump control, device setup</li>
+                <li>Django REST — pump commands, schedules, device-facing endpoints</li>
+                <li>Firmware controller — hardware actuation and API sync</li>
+              </ul>
+            </div>
+            <div class="case-block">
+              <h3>Delivery stack</h3>
+              <ul>
+                <li>Kong Ingress + plugins in front of the API</li>
+                <li>Terraform modules for database, backend, and ingress</li>
+                <li>Minikube + Docker for local cluster parity</li>
+                <li>GitHub Actions workflows per component</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="kong">
+        <div class="container reveal">
+          <p class="section-label">Kong gateway &amp; auth plugin</p>
+          <h2 class="section-title">Auth once — not on every call</h2>
+          <p class="section-lead">
+            A custom Kong auth plugin checks credentials against the database so subsequent API
+            calls reuse a validated session instead of forcing a full login on every request —
+            lower latency on the hot path for mobile and firmware traffic.
+          </p>
+
+          <div class="diagram-grid">
+            <figure>
+              <div class="diagram-panel" data-diagram="../assets/iot/auth-plugin-flow.png" data-alt="Auth plugin before and after flow">
+                <div class="diagram-fallback">
+                  <h4>Auth plugin flow</h4>
+                  <div class="flow-steps">
+                    <div class="flow-step">
+                      <span class="n">1</span>
+                      <p><strong>First request</strong> — plugin authenticates and records session in DB</p>
+                    </div>
+                    <div class="flow-step">
+                      <span class="n">2</span>
+                      <p><strong>Later requests</strong> — plugin reads DB session; skip full login</p>
+                    </div>
+                    <div class="flow-step">
+                      <span class="n">3</span>
+                      <p><strong>Upstream</strong> — Django receives an already-authorized call</p>
+                    </div>
+                  </div>
+                  <div class="compare-row">
+                    <div class="compare-box before">
+                      <strong>Before</strong>
+                      Login / token validate on every API call → extra round-trips
+                    </div>
+                    <span class="compare-vs">→</span>
+                    <div class="compare-box after">
+                      <strong>After</strong>
+                      DB-backed session at Kong → fewer auth hits, faster responses
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="diagram-caption">Auth plugin — replace with <code>auth-plugin-flow.png</code></figcaption>
+            </figure>
+
+            <figure>
+              <div class="diagram-panel" data-diagram="../assets/iot/auth-performance.png" data-alt="Auth performance comparison">
+                <div class="diagram-fallback">
+                  <h4>Why it matters on IoT</h4>
+                  <div class="flow-steps">
+                    <div class="flow-step">
+                      <span class="n">↓</span>
+                      <p><strong>Firmware polls</strong> control status on an interval — auth cost multiplies</p>
+                    </div>
+                    <div class="flow-step">
+                      <span class="n">↓</span>
+                      <p><strong>Mobile refreshes</strong> schedules and status while the app is open</p>
+                    </div>
+                    <div class="flow-step">
+                      <span class="n">✓</span>
+                      <p><strong>Gateway auth</strong> keeps validation close to the edge, not in every view</p>
+                    </div>
+                  </div>
+                  <div class="compare-row">
+                    <div class="compare-box before">
+                      <strong>Without plugin</strong>
+                      Repeated login / auth work per call
+                    </div>
+                    <span class="compare-vs">→</span>
+                    <div class="compare-box after">
+                      <strong>With plugin</strong>
+                      Session reuse via DB → better API performance
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="diagram-caption">Performance story — replace with <code>auth-performance.png</code></figcaption>
+            </figure>
+          </div>
+
+          <div class="metric-callout">
+            <span class="m">Faster API path</span>
+            <p>
+              Custom Kong auth plugin avoids re-login on every request by validating against the DB
+              session — built for chatty mobile and device traffic without sacrificing control at the gateway.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="quality">
+        <div class="container reveal">
+          <p class="section-label">Quality engineering</p>
+          <h2 class="section-title">Where the QA story lives</h2>
+          <p class="section-lead">
+            Pact demo, mobile automation lab (Appium + Maestro), Kong at the edge, and a deployment
+            lab — not only an IoT toy.
+          </p>
+          <div class="qa-layers">
+            <div class="qa-layer">
+              <span class="status">In place</span>
+              <h3>Unit tests</h3>
+              <p>Backend pytest / Django tests for domain and API behaviour.</p>
+            </div>
+            <div class="qa-layer">
+              <span class="status">In place</span>
+              <h3>Contract tests (Pact)</h3>
+              <p>
+                Consumer contracts from firmware and frontend; provider verification on the backend
+                so auth and control payloads cannot silently break.
+              </p>
+            </div>
+            <div class="qa-layer">
+              <span class="status">In place</span>
+              <h3>Mobile automation — Appium</h3>
+              <p>
+                Industry-standard mobile UI automation for critical flows — the framework most teams
+                still ask for.
+              </p>
+            </div>
+            <div class="qa-layer">
+              <span class="status">In place</span>
+              <h3>Mobile automation — Maestro</h3>
+              <p>
+                Fast, YAML-driven flows for the Expo app — quicker authoring alongside Appium.
+              </p>
+            </div>
+            <div class="qa-layer">
+              <span class="status">In place</span>
+              <h3>Kong gateway + auth plugin</h3>
+              <p>
+                Kong Ingress in front of Django; custom plugin authenticates via DB so APIs are not
+                forced through login on every call.
+              </p>
+            </div>
+            <div class="qa-layer">
+              <span class="status">In place</span>
+              <h3>Infra as code</h3>
+              <p>
+                Terraform workspaces for local/dev — Postgres, backend, and Kong-annotated ingress.
+              </p>
+            </div>
+            <div class="qa-layer">
+              <span class="status roadmap">Roadmap</span>
+              <h3>Playwright E2E</h3>
+              <p>Web/API-facing critical flows against a running stack.</p>
+            </div>
+            <div class="qa-layer">
+              <span class="status roadmap">Roadmap</span>
+              <h3>Terratest</h3>
+              <p>Automated assertions on Terraform-provisioned Kubernetes resources.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="screens">
+        <div class="container reveal">
+          <p class="section-label">App screens</p>
+          <h2 class="section-title">Mobile experience</h2>
+          <p class="section-lead">
+            Mockups follow the real Smart Pump Controller UI (dark theme, orange accent). Drop
+            screenshots into <code>assets/iot/</code> to replace them automatically.
+          </p>
+
+          <div class="phone-gallery">
+            <figure class="phone-wrap">
+              <div class="phone">
+                <div
+                  class="phone-screen"
+                  data-screenshot="../assets/iot/login.png"
+                  data-alt="Smart Pump Controller login screen"
+                >
+                  <div class="placeholder-ui app-ui">
+                    <div class="ph-status"><span>9:41</span><span>LTE</span></div>
+                    <div class="ph-icon" aria-hidden="true">⇢</div>
+                    <div class="ph-title" style="text-align: center">Welcome Back</div>
+                    <div class="ph-sub" style="text-align: center; margin-bottom: 1rem">
+                      Sign in to manage your devices
+                    </div>
+                    <div class="ph-field">✉ &nbsp; Email address</div>
+                    <div class="ph-field">🔒 &nbsp; Password</div>
+                    <div class="ph-btn" style="margin-top: 0.75rem">Sign in</div>
+                    <div class="ph-sub" style="text-align: center; margin-top: 0.5rem">
+                      Create account
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="phone-caption">Login</figcaption>
+            </figure>
+
+            <figure class="phone-wrap">
+              <div class="phone">
+                <div
+                  class="phone-screen"
+                  data-screenshot="../assets/iot/dashboard.png"
+                  data-alt="Smart Pump Controller schedules dashboard"
+                >
+                  <div class="placeholder-ui app-ui">
+                    <div class="ph-status"><span>9:41</span><span>LTE</span></div>
+                    <div class="ph-title">Schedules</div>
+                    <div class="ph-sub">Swipe to edit · activate · delete</div>
+                    <div class="ph-card">
+                      <strong>Morning cycle <span class="ph-badge">Active</span></strong>
+                      <span>06:00 – 07:30 · Ends in 42m</span>
+                    </div>
+                    <div class="ph-card">
+                      <strong>Evening top-up <span class="ph-badge off">Idle</span></strong>
+                      <span>18:00 – 18:45 · Starts in 5h</span>
+                    </div>
+                    <div class="ph-card">
+                      <strong>Weekend run <span class="ph-badge">Active</span></strong>
+                      <span>Sat 09:00 – 11:00</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="phone-caption">Dashboard</figcaption>
+            </figure>
+
+            <figure class="phone-wrap">
+              <div class="phone">
+                <div
+                  class="phone-screen"
+                  data-screenshot="../assets/iot/control.png"
+                  data-alt="Smart Pump Controller pump control screen"
+                >
+                  <div class="placeholder-ui app-ui">
+                    <div class="ph-status"><span>9:41</span><span>LTE</span></div>
+                    <div class="ph-title">Pump Control</div>
+                    <div class="ph-sub">Manual start &amp; stop</div>
+                    <div class="ph-card">
+                      <strong>Pump status</strong>
+                      <span>Offline · last changed 12m ago</span>
+                    </div>
+                    <div class="ph-btn" style="margin-top: 1rem">Start Pump</div>
+                    <div class="ph-btn ghost">Stop Pump</div>
+                    <div class="ph-btn ghost">Schedule now</div>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="phone-caption">Pump Control</figcaption>
+            </figure>
+
+            <figure class="phone-wrap">
+              <div class="phone">
+                <div
+                  class="phone-screen"
+                  data-screenshot="../assets/iot/schedule.png"
+                  data-alt="Smart Pump Controller add schedule screen"
+                >
+                  <div class="placeholder-ui app-ui">
+                    <div class="ph-status"><span>9:41</span><span>LTE</span></div>
+                    <div class="ph-title">Add Schedule</div>
+                    <div class="ph-sub">Start / end · activate</div>
+                    <div class="ph-card">
+                      <strong>Start</strong>
+                      <span>Tue 06:00</span>
+                    </div>
+                    <div class="ph-card">
+                      <strong>End</strong>
+                      <span>Tue 07:30</span>
+                    </div>
+                    <div class="ph-toggle">
+                      <span>Active</span>
+                      <span class="ph-pill" aria-hidden="true"></span>
+                    </div>
+                    <div class="ph-btn" style="margin-top: 0.85rem">Save schedule</div>
+                  </div>
+                </div>
+              </div>
+              <figcaption class="phone-caption">Schedule</figcaption>
+            </figure>
+          </div>
+
+          <p class="placeholder-note">
+            App shots:
+            <code>login.png</code>, <code>dashboard.png</code>, <code>control.png</code>,
+            <code>schedule.png</code>. Diagrams:
+            <code>architecture.png</code>, <code>kong-gateway.png</code>,
+            <code>auth-plugin-flow.png</code>, <code>auth-performance.png</code>.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container reveal">
+          <p class="section-label">Why it matters</p>
+          <h2 class="section-title">QA leadership you can ship</h2>
+          <p class="section-lead" style="max-width: 40rem">
+            Smart Pump Controller proves contract testing, mobile automation, Kong gateway with a
+            custom auth plugin for performance, infra-as-code, and full-stack delivery — the same
+            discipline used to raise release confidence on payments platforms.
+          </p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="../index.html#contact">Get in touch</a>
+            <a class="btn btn-ghost" href="../projects.html">More projects</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© <span id="year"></span> Samson Mwangi</span>
+        <a href="https://github.com/skingori" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

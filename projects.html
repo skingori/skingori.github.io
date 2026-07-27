@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Projects by Samson Mwangi — Smart Pump IoT, QA-Hub, QA Tingg, and K6-XRAY."
+    />
+    <title>Projects — Samson Mwangi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-nav">
+      <div class="container">
+        <a class="nav-brand" href="index.html">Samson Mwangi</a>
+        <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">☰</button>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#competencies">Expertise</a>
+          <a href="index.html#experience">Experience</a>
+          <a href="projects.html" aria-current="page">Projects</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <header class="page-header">
+        <div class="container">
+          <a class="back-link" href="index.html">← Home</a>
+          <h1>Projects</h1>
+          <p>
+            From contract-testing tooling to a full IoT stack — selected work that shows how quality
+            engineering and product building reinforce each other.
+          </p>
+        </div>
+      </header>
+
+      <section style="padding-top: 0">
+        <div class="container reveal">
+          <div class="project-list">
+            <a class="project-row featured" href="projects/smart-pump.html">
+              <div>
+                <h3>Smart Pump Controller (IoT + Pact + Kong + Terraform)</h3>
+                <p>
+                  Full monorepo: Expo app, Django API, Kong gateway with custom DB auth plugin,
+                  firmware, Minikube/Terraform — unit tests, Pact, Appium, and Maestro in place.
+                </p>
+              </div>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <a
+              class="project-row"
+              href="https://github.com/skingori/QA-hub"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <h3>QA Dashboard</h3>
+                <p>Jira QA project tracker for centralized visibility across QA workstreams.</p>
+              </div>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <a
+              class="project-row"
+              href="https://pypi.org/project/qatingg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <h3>QA Tingg</h3>
+                <p>Python plugin for pytest integration — published on PyPI.</p>
+              </div>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <a
+              class="project-row"
+              href="https://github.com/skingori/k6-json-xray"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <h3>K6-XRAY</h3>
+                <p>Converts K6 JSON output into Xray format for Jira-native performance reporting.</p>
+              </div>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <a
+              class="project-row"
+              href="https://dev.to/skingori"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <h3>K6 + Xray / Jira guide</h3>
+                <p>Integration write-up on Dev.to covering performance results into test management.</p>
+              </div>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© <span id="year"></span> Samson Mwangi</span>
+        <a href="mailto:infor.samson@gmail.com">infor.samson@gmail.com</a>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
