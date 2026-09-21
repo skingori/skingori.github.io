@@ -65,4 +65,47 @@
     };
     img.src = src;
   });
+
+  /* Hero muted loop: try mp4 / webm / gif, else keep CSS terminal */
+  const heroLoop = document.querySelector("[data-hero-loop]");
+  if (heroLoop) {
+    const sources = (heroLoop.getAttribute("data-hero-loop") || "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    const tryNext = (i) => {
+      if (i >= sources.length) return;
+      const src = sources[i];
+      const isVideo = /\.(mp4|webm)$/i.test(src);
+
+      if (isVideo) {
+        const video = document.createElement("video");
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        video.loop = true;
+        video.preload = "metadata";
+        video.setAttribute("muted", "");
+        video.setAttribute("playsinline", "");
+        video.setAttribute("aria-hidden", "true");
+        video.onloadeddata = () => {
+          heroLoop.replaceChildren(video);
+          video.play().catch(() => {});
+        };
+        video.onerror = () => tryNext(i + 1);
+        video.src = src;
+      } else {
+        const img = new Image();
+        img.alt = "";
+        img.setAttribute("aria-hidden", "true");
+        img.onload = () => heroLoop.replaceChildren(img);
+        img.onerror = () => tryNext(i + 1);
+        img.src = src;
+      }
+    };
+
+    tryNext(0);
+  }
 })();
