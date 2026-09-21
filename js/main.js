@@ -66,21 +66,40 @@
     img.src = src;
   });
 
-  /* Hero muted loop: try mp4 / webm / gif, else keep CSS terminal */
+  /* Hero muted loop: play inline video, else try fallbacks, else terminal */
   const heroLoop = document.querySelector("[data-hero-loop]");
   if (heroLoop) {
-    const sources = (heroLoop.getAttribute("data-hero-loop") || "")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
+    const terminal = heroLoop.querySelector(".hero-terminal");
+    const inlineVideo = heroLoop.querySelector("video.hero-video");
 
-    const tryNext = (i) => {
-      if (i >= sources.length) return;
+    const showTerminal = () => {
+      if (inlineVideo) inlineVideo.remove();
+      heroLoop.querySelectorAll("video, img").forEach((el) => el.remove());
+      if (terminal) terminal.hidden = false;
+    };
+
+    const playVideo = (video) => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.setAttribute("muted", "");
+      video.setAttribute("playsinline", "");
+      return video.play().catch(() => {
+        /* autoplay blocked — still leave muted video visible */
+      });
+    };
+
+    const trySources = (sources, i) => {
+      if (i >= sources.length) {
+        showTerminal();
+        return;
+      }
       const src = sources[i];
       const isVideo = /\.(mp4|webm)$/i.test(src);
 
       if (isVideo) {
         const video = document.createElement("video");
+        video.className = "hero-video";
         video.muted = true;
         video.defaultMuted = true;
         video.playsInline = true;
@@ -91,21 +110,70 @@
         video.setAttribute("playsinline", "");
         video.setAttribute("aria-hidden", "true");
         video.onloadeddata = () => {
-          heroLoop.replaceChildren(video);
-          video.play().catch(() => {});
+          if (terminal) terminal.hidden = true;
+          if (inlineVideo) inlineVideo.remove();
+          heroLoop.querySelectorAll("video, img").forEach((el) => {
+            if (el !== video) el.remove();
+          });
+          heroLoop.prepend(video);
+          playVideo(video);
         };
-        video.onerror = () => tryNext(i + 1);
+        video.onerror = () => trySources(sources, i + 1);
         video.src = src;
       } else {
         const img = new Image();
         img.alt = "";
         img.setAttribute("aria-hidden", "true");
-        img.onload = () => heroLoop.replaceChildren(img);
-        img.onerror = () => tryNext(i + 1);
+        img.onload = () => {
+          if (terminal) terminal.hidden = true;
+          if (inlineVideo) inlineVideo.remove();
+          heroLoop.querySelectorAll("video, img").forEach((el) => el.remove());
+          heroLoop.prepend(img);
+        };
+        img.onerror = () => trySources(sources, i + 1);
         img.src = src;
       }
     };
 
-    tryNext(0);
+    if (inlineVideo) {
+      const onFail = () => {
+        const sources = (heroLoop.getAttribute("data-hero-loop") || "")
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+          .filter((s) => !/loop\.mp4$/i.test(s));
+        if (sources.length) trySources(sources, 0);
+        else showTerminal();
+      };
+
+      inlineVideo.addEventListener("error", onFail, { once: true });
+      if (inlineVideo.readyState >= 2) {
+        if (terminal) terminal.hidden = true;
+        playVideo(inlineVideo);
+      } else {
+        inlineVideo.addEventListener(
+          "loadeddata",
+          () => {
+            if (terminal) terminal.hidden = true;
+            playVideo(inlineVideo);
+          },
+          { once: true }
+        );
+        /* If source never loads */
+        setTimeout(() => {
+          if (inlineVideo.readyState < 2 && !inlineVideo.error) {
+            /* still buffering — leave as-is */
+          } else if (inlineVideo.error) {
+            onFail();
+          }
+        }, 4000);
+      }
+    } else {
+      const sources = (heroLoop.getAttribute("data-hero-loop") || "")
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
+      trySources(sources, 0);
+    }
   }
 })();

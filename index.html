@@ -33,18 +33,43 @@
 
     <main>
       <section class="hero">
-        <div class="hero-media" aria-hidden="true">
-          <div class="hero-media-wash"></div>
-          <div
-            class="hero-loop"
-            data-hero-loop="assets/hero/loop.mp4,assets/hero/loop.webm,assets/hero/loop.gif"
-          >
-            <div class="hero-terminal">
-              <div class="hero-terminal-bar">
-                <span></span><span></span><span></span>
-                <em>playwright · pact · k6</em>
-              </div>
-              <pre class="hero-terminal-scroll"><code>$ npx playwright test --project=chromium
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="hero-meta">Nairobi · Quality Engineering</p>
+            <h1 class="hero-brand">Samson Mwangi</h1>
+            <p class="hero-headline">Senior QA Engineer | SDET | Technical Team Lead</p>
+            <p class="hero-support">
+              9+ years across fintech and payments — contract testing, performance engineering,
+              and automation that raises release velocity without sacrificing reliability.
+            </p>
+            <div class="cta-group">
+              <a class="btn btn-ghost" href="#experience">View experience ›</a>
+              <a class="btn btn-primary" href="cv/Samson_Mwangi_CV_ATS.docx" download>Download CV ›</a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div
+              class="hero-loop"
+              data-hero-loop="assets/hero/loop.mp4,assets/hero/loop.webm,assets/hero/loop.gif"
+            >
+              <video
+                class="hero-video"
+                muted
+                defaultMuted
+                autoplay
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="Screen recording of test automation in progress"
+              >
+                <source src="assets/hero/loop.mp4" type="video/mp4" />
+              </video>
+              <div class="hero-terminal" hidden>
+                <div class="hero-terminal-bar">
+                  <span></span><span></span><span></span>
+                  <em>playwright · pact · k6</em>
+                </div>
+                <pre class="hero-terminal-scroll"><code>$ npx playwright test --project=chromium
   ✓ auth.login.spec.ts                 (1.2s)
   ✓ payments.transfer.spec.ts          (2.4s)
   ✓ contract.pact.verify.ts            (0.8s)
@@ -52,13 +77,11 @@
 $ k6 run performance/smoke.js
   checks.........................: 100.00% ✓ 1240
   http_req_duration..............: avg=86ms p(95)=142ms
-  iterations.....................: 10000
 
-$ pact-broker can-i-deploy --pacticipant frontend --latest
+$ pact-broker can-i-deploy --latest
   Computer says yes ✓
 
-$ gitlab-ci · quality-gate
-  unit · contract · e2e · perf …… passed
+$ gitlab-ci · quality-gate …… passed
 
 $ npx playwright test --project=chromium
   ✓ auth.login.spec.ts                 (1.2s)
@@ -68,28 +91,13 @@ $ npx playwright test --project=chromium
 $ k6 run performance/smoke.js
   checks.........................: 100.00% ✓ 1240
   http_req_duration..............: avg=86ms p(95)=142ms
-  iterations.....................: 10000
 
-$ pact-broker can-i-deploy --pacticipant frontend --latest
+$ pact-broker can-i-deploy --latest
   Computer says yes ✓
 
-$ gitlab-ci · quality-gate
-  unit · contract · e2e · perf …… passed</code></pre>
+$ gitlab-ci · quality-gate …… passed</code></pre>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="container hero-inner">
-          <p class="hero-meta">Nairobi · Quality Engineering</p>
-          <h1 class="hero-brand">Samson Mwangi</h1>
-          <p class="hero-headline">Senior QA Engineer | SDET | Technical Team Lead</p>
-          <p class="hero-support">
-            9+ years across fintech and payments — contract testing, performance engineering,
-            and automation that raises release velocity without sacrificing reliability.
-          </p>
-          <div class="cta-group">
-            <a class="btn btn-primary" href="#experience">View experience</a>
-            <a class="btn btn-ghost" href="cv/Samson_Mwangi_CV_ATS.docx" download>Download CV</a>
-            <a class="btn btn-ghost" href="projects/smart-pump.html">Case study</a>
           </div>
         </div>
       </section>
