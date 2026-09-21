@@ -1,8 +1,6 @@
-# Smart Pump Controller — screenshots & diagrams
+# Place Smart Pump Controller screenshots & diagrams here
 
-Drop files here to replace placeholders on the case study page automatically.
-
-## App screens
+## App screens (PNG)
 
 | File | Screen |
 |------|--------|
@@ -11,13 +9,13 @@ Drop files here to replace placeholders on the case study page automatically.
 | `control.png` | Start / stop pump |
 | `schedule.png` | Add / edit schedule |
 
-## Flow diagrams
+## Flow diagrams (JPG preferred for web)
 
 | File | Content |
 |------|---------|
-| `architecture.png` | End-to-end request path (app → Kong → Django → device) |
-| `kong-gateway.png` | Kong Ingress / routing / plugins |
-| `auth-plugin-flow.png` | Custom auth plugin: first login vs DB session reuse |
-| `auth-performance.png` | Before/after performance story |
+| `architecture.png` | End-to-end request path |
+| `kong-gateway.png` | Kong Ingress / routing |
+| `auth-plugin-flow.jpg` | Custom auth plugin session reuse |
+| `auth-performance.jpg` | Before/after performance story |
 
-Export diagrams as PNG (or JPEG with the same names). The page swaps them in when present — no code changes needed.
+The case study page loads these automatically when present.

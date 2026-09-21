@@ -1,0 +1,87 @@
+SAMSON MWANGI
+Senior QA Engineer | SDET | Technical Team Lead | Test Automation Engineer
+Nairobi, Kenya | +254 724 090 774 | infor.samson@gmail.com | https://www.linkedin.com/in/skingori/ | https://github.com/skingori
+
+PROFESSIONAL SUMMARY
+Senior QA Engineer and Technical Team Lead with 9+ years in Quality Assurance, Test Automation, and Software Development Engineer in Test (SDET) roles across fintech, payments, and blockchain. Expert in contract testing (Pact), performance testing (k6, JMeter, Gatling), UI automation (Playwright, Cypress, Selenium, Appium, Maestro), API testing, CI/CD, and DevOps. Selected for the k6 Championship Program. Proven record reducing defect rates, improving release velocity, and mentoring QA teams. Hands-on with Python, JavaScript, TypeScript, Java, Terraform, Kong API Gateway, AWS, and GitLab CI.
+
+CORE SKILLS
+Test Automation: Playwright, Cypress, Selenium, Appium, Maestro, Jest, PactumJS, REST Assured, Espresso, UI testing, mobile testing, end-to-end testing, regression testing, smoke testing
+API and Contract Testing: Pact, consumer-driven contract testing, REST API testing, microservices testing, integration testing, Postman
+Performance Testing: k6, JMeter, Gatling, load testing, stress testing, performance engineering
+CI/CD and DevOps: GitLab CI, Jenkins, GitHub Actions, AWS CodePipeline, Azure DevOps, Docker, Kubernetes, Minikube, Terraform, Terratest, Infrastructure as Code, Kong API Gateway
+Observability and Quality Tools: Datadog, Honeybadger, SonarQube, Jira, Xray, TestRail, Zephyr, Confluence, LambdaTest
+Programming Languages: Python, JavaScript, TypeScript, Java, Go, Ruby, SQL
+Cloud and Data: AWS, Azure, AWS Lambda, EventBridge, Kinesis, Kafka, RabbitMQ, PostgreSQL, MySQL, Cosmos DB
+Practices: Agile, Scrum, Kanban, Shift-Left Testing, STLC, SDLC, Risk-Based Testing, test strategy, defect management, quality engineering
+
+KEY ACHIEVEMENTS
+- Selected for the k6 Championship Program for advanced performance testing expertise.
+- Reduced microservice integration failures by 50% by introducing consumer-driven contract testing with Pact.
+- Cut post-release defect rate by 30% and increased release velocity by 50% by building CI/CD pipelines on AWS CodePipeline.
+- Sustained 98% system uptime by integrating observability into releases with Datadog and Honeybadger.
+- Validated system performance under 10,000+ transactions per minute using k6.
+- Led and mentored a QA team of 5 engineers, improving release accuracy and collaboration.
+- Reduced developer turnaround time by 25% through shift-left testing training.
+- Designed and built an end-to-end IoT Smart Pump Controller (Django, React Native, firmware) with Pact, Appium, Maestro, Terraform, and Kong.
+
+WORK EXPERIENCE
+
+Senior Developer in Test | Cellulant
+January 2026 – Present | Nairobi, Kenya
+- Lead CI/CD integration on GitLab CI and AWS to accelerate software release cycles.
+- Direct cross-platform test automation strategy using LambdaTest across environments and devices.
+- Own regression testing strategy and test management in Confluence, Jira, and TestRail.
+- Coordinate end-to-end testing across engineering teams to support successful product launches.
+
+Senior Software Test Engineer | AZA Finance
+May 2022 – September 2025 | Remote / London Area, United Kingdom
+- Built and scaled test automation frameworks with Cypress, Playwright, and Selenium, reducing UI defects by 30%.
+- Executed large-scale performance testing with k6, validating 10,000+ transactions per minute.
+- Reduced deployment errors by 35% by introducing Infrastructure as Code testing with Terratest and Terraform.
+- Achieved 98% production uptime using Datadog and Honeybadger for monitoring and release quality.
+- Directed defect tracking and resolution with Jira and Xray in partnership with engineering teams.
+- Aligned test strategy with business goals, compliance standards, and release timelines.
+- Validated payment integrations and microservices through daily manual and automated API testing.
+
+Software Test Automation Engineer | AZA Finance
+January 2020 – April 2022 | Remote / London Area, United Kingdom
+- Designed the organization’s first Pact contract testing framework, cutting microservice integration issues by 50%.
+- Led defect triage and root-cause documentation to accelerate resolution.
+- Strengthened payment compliance with detailed test plans, achieving 100% audit success.
+- Resolved 95% of SonarQube static analysis issues, improving code quality.
+- Implemented CI/CD pipelines with AWS CodePipeline, cutting release times by 50%.
+
+Software Test Automation Engineer | Cellulant
+January 2018 – December 2019 | Kenya
+- Built QA-Hub integrated with TestRail for centralized QA project tracking.
+- Developed mobile test automation with Appium and Espresso, improving app stability by 30%.
+- Reduced post-deployment defects by 40% with regression and smoke test suites.
+- Partnered with backend and UI teams (Java, PHP, React) to improve system performance by 25%.
+- Migrated deployment pipelines from Jenkins to GitLab CI.
+
+Quality Assurance Engineer | Andela
+February 2017 – December 2017 | Nairobi, Kenya
+- Designed high-impact test cases that reduced post-release issues by 30%.
+- Built scalable regression suites for backend, mobile, and blockchain platforms.
+- Improved defect resolution time by 40% through precise triage and documentation.
+- Documented test strategies and cases for traceability and audit readiness.
+
+PROJECTS
+- Smart Pump Controller (IoT) — Django REST API, React Native / Expo mobile app, firmware; Pact contract tests; Appium and Maestro mobile automation; Terraform and Minikube; Kong API Gateway with custom auth plugin for API performance.
+- QA Dashboard (QA-Hub) — Jira QA project tracker. https://github.com/skingori/QA-hub
+- QA Tingg — Python pytest plugin. https://pypi.org/project/qatingg
+- K6-XRAY — Converts k6 JSON results to Xray format for Jira. https://github.com/skingori/k6-json-xray
+- Technical writing — k6 + Xray / Jira integration guide. https://dev.to/skingori
+
+CERTIFICATIONS
+- ISTQB Certified Tester – AI Testing (2025)
+- AWS Certified Cloud Practitioner (2025)
+- ITIL Foundation
+- Cisco Foundation
+
+EDUCATION
+Bachelor of Science in Information Technology — Kenya Methodist University
+
+LANGUAGES
+English (Proficient), French (Intermediate)

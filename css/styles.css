@@ -1,6 +1,6 @@
 /* ============================================================
    Samson Mwangi — Portfolio Design System
-   Slate + electric teal · Syne + Manrope
+   Slate + muted teal · Manrope
    ============================================================ */
 
 :root {
@@ -9,13 +9,14 @@
   --bg-soft: #121a28;
   --text: #e8eef7;
   --text-muted: #9aa8bc;
-  --accent: #2dd4bf;
-  --accent-dim: rgba(45, 212, 191, 0.14);
-  --accent-glow: rgba(45, 212, 191, 0.35);
+  --accent: #5a9e94;
+  --accent-hover: #6eb0a6;
+  --accent-dim: rgba(90, 158, 148, 0.12);
+  --accent-on: #0a1614;
   --border: rgba(232, 238, 247, 0.08);
   --border-strong: rgba(232, 238, 247, 0.16);
   --radius: 4px;
-  --font-display: "Syne", system-ui, sans-serif;
+  --font-display: "Manrope", system-ui, sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
   --max: 1120px;
   --nav-h: 72px;
@@ -52,9 +53,8 @@ body::before {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(ellipse 80% 50% at 15% -10%, rgba(45, 212, 191, 0.12), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(56, 120, 180, 0.18), transparent 50%),
-    radial-gradient(ellipse 50% 60% at 50% 100%, rgba(45, 212, 191, 0.06), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 18% 0%, rgba(90, 158, 148, 0.07), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 92% 8%, rgba(56, 100, 140, 0.08), transparent 50%),
     var(--bg);
 }
 
@@ -63,7 +63,7 @@ body::after {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: 0.35;
+  opacity: 0.12;
   background-image:
     linear-gradient(rgba(232, 238, 247, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(232, 238, 247, 0.03) 1px, transparent 1px);
@@ -84,7 +84,7 @@ a {
 }
 
 a:hover {
-  color: #5eead4;
+  color: var(--accent-hover);
 }
 
 ul {
@@ -197,14 +197,14 @@ ul {
 
 .btn-primary {
   background: var(--accent);
-  color: #042f2e;
-  box-shadow: 0 0 0 0 var(--accent-glow);
+  color: var(--accent-on);
+  box-shadow: none;
 }
 
 .btn-primary:hover {
-  background: #5eead4;
-  color: #042f2e;
-  box-shadow: 0 8px 28px -6px var(--accent-glow);
+  background: var(--accent-hover);
+  color: var(--accent-on);
+  box-shadow: none;
 }
 
 .btn-ghost {
@@ -239,10 +239,10 @@ ul {
 
 .hero-brand {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(3rem, 8vw, 5.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+  font-weight: 700;
+  font-size: clamp(2.75rem, 7vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--text);
   margin-bottom: 1.25rem;
   opacity: 0;
@@ -253,8 +253,8 @@ ul {
 .hero-headline {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.35rem, 3vw, 1.85rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  letter-spacing: -0.01em;
   color: var(--accent);
   margin-bottom: 1rem;
   opacity: 0;
@@ -293,8 +293,8 @@ section {
 .section-label {
   display: inline-block;
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 0.75rem;
@@ -303,9 +303,9 @@ section {
 .section-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.75rem, 3.5vw, 2.4rem);
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  font-size: clamp(1.65rem, 3.2vw, 2.15rem);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   margin-bottom: 0.75rem;
 }
 
@@ -369,10 +369,10 @@ section {
 
 .achieve-metric {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.5rem;
+  font-weight: 700;
+  font-size: 1.45rem;
   color: var(--accent);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 .achieve-item p {
@@ -407,7 +407,7 @@ section {
   height: 9px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-dim);
+  box-shadow: 0 0 0 3px var(--bg);
 }
 
 .timeline-meta {
@@ -484,9 +484,9 @@ section {
   font-size: 0.82rem;
   font-weight: 500;
   padding: 0.35rem 0.7rem;
-  background: var(--accent-dim);
-  color: var(--accent);
-  border: 1px solid rgba(45, 212, 191, 0.22);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius);
 }
 
@@ -503,9 +503,9 @@ section {
 
 .project-feature-copy h3 {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 1.65rem;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
 }
 
@@ -595,7 +595,7 @@ section {
   background: linear-gradient(90deg, var(--accent-dim), transparent);
   margin: 0 -1rem;
   padding-inline: 1rem;
-  border: 1px solid rgba(45, 212, 191, 0.2);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius);
 }
 
@@ -665,10 +665,10 @@ section {
 
 .page-header h1 {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  letter-spacing: -0.04em;
-  line-height: 1.05;
+  font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   margin-bottom: 0.75rem;
 }
 
@@ -935,8 +935,8 @@ section {
 }
 
 .placeholder-ui .ph-card {
-  background: rgba(45, 212, 191, 0.08);
-  border: 1px solid rgba(45, 212, 191, 0.2);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-strong);
   border-radius: 8px;
   padding: 0.75rem;
   margin-bottom: 0.6rem;
@@ -979,7 +979,7 @@ section {
   top: 3px;
   width: 16px;
   height: 16px;
-  background: #042f2e;
+  background: var(--accent-on);
   border-radius: 50%;
 }
 
@@ -1030,12 +1030,12 @@ section {
 }
 
 .case-stack span {
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.4rem 0.85rem;
-  background: var(--accent-dim);
-  color: var(--accent);
-  border: 1px solid rgba(45, 212, 191, 0.25);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius);
 }
 
@@ -1121,8 +1121,8 @@ section {
 }
 
 .arch-node.highlight {
-  border-color: rgba(45, 212, 191, 0.45);
-  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.15);
+  border-color: var(--border-strong);
+  background: var(--accent-dim);
 }
 
 /* Flow diagrams & diagram screenshots */
@@ -1198,7 +1198,7 @@ section {
 
 .flow-step .n {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 0.85rem;
   color: var(--accent);
   line-height: 1.4;
@@ -1249,7 +1249,7 @@ section {
 }
 
 .compare-box.after {
-  border-color: rgba(45, 212, 191, 0.3);
+  border-color: var(--border-strong);
   background: var(--accent-dim);
 }
 
@@ -1266,17 +1266,17 @@ section {
   gap: 1.5rem;
   margin: 1.5rem 0 0;
   padding: 1.25rem 1.5rem;
-  border: 1px solid rgba(45, 212, 191, 0.25);
+  border: 1px solid var(--border-strong);
   background: var(--accent-dim);
   border-radius: var(--radius);
 }
 
 .metric-callout .m {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.35rem;
+  font-weight: 700;
+  font-size: 1.3rem;
   color: var(--accent);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 .metric-callout p {
