@@ -236,10 +236,9 @@ ul {
 /* ---------- Hero (k6-style two-column) ---------- */
 .hero {
   position: relative;
-  min-height: calc(100vh - var(--nav-h));
   display: flex;
   align-items: center;
-  padding: 4rem 0 5rem;
+  padding: 1.75rem 0 2rem;
   background: #fff;
 }
 
@@ -425,7 +424,7 @@ ul {
 
 /* ---------- Tools strip (logo row) ---------- */
 .tools-strip {
-  padding: 2.75rem 0 3rem;
+  padding: 1.5rem 0 1.75rem;
   background: #fff;
   border-bottom: 1px solid var(--border);
   scroll-margin-top: calc(var(--nav-h) + 0.75rem);
@@ -438,7 +437,7 @@ ul {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #8b849c;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .tools-logos {
