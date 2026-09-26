@@ -238,7 +238,7 @@ ul {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 1.75rem 0 2rem;
+  padding: 5rem 0 5rem;
   background: #fff;
 }
 
@@ -248,8 +248,8 @@ ul {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 1px;
-  background: var(--border);
+  /* height: 1px; */
+  /* background: var(--border); */
 }
 
 .hero-grid {
@@ -374,16 +374,21 @@ ul {
 }
 
 .hero-brand {
-  font-family: var(--font-display);
-  font-weight: 650;
-  font-size: clamp(2.6rem, 6vw, 4.25rem);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
+  font-size: 40px;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  margin-top: 61px;
+  max-width: 85%;
+  /* font-family: var(--font-display);
+  font-weight: 100;
+  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
   color: var(--text);
-  margin-bottom: 1rem;
+  margin-bottom: 0.55rem;
   opacity: 0;
   transform: translateY(18px);
-  animation: heroIn 0.8s var(--ease) 0.12s forwards;
+  animation: heroIn 0.8s var(--ease) 0.12s forwards; */
 }
 
 .hero-headline {
@@ -424,7 +429,7 @@ ul {
 
 /* ---------- Tools strip (logo row) ---------- */
 .tools-strip {
-  padding: 1.5rem 0 1.75rem;
+  padding: 2.75rem 0 3rem;
   background: #fff;
   border-bottom: 1px solid var(--border);
   scroll-margin-top: calc(var(--nav-h) + 0.75rem);
@@ -437,7 +442,7 @@ ul {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #8b849c;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
 }
 
 .tools-logos {
@@ -463,10 +468,15 @@ ul {
   display: block;
   height: 28px;
   width: auto;
-  max-width: 128px;
+  max-width: 42px;
   object-fit: contain;
   opacity: 0.75;
   transition: opacity 0.2s var(--ease);
+}
+
+.tools-logos img.logo-wordmark {
+  height: 22px;
+  max-width: 108px;
 }
 
 .tools-logos li:hover img {
